@@ -1,0 +1,603 @@
+{
+  "intents": [
+    {
+      "intent": "Book_ticket",
+      "examples": [
+        {
+          "text": "Book ticket"
+        },
+        {
+          "text": "Hey book my ticket"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "enquiry",
+      "examples": [
+        {
+          "text": "Are there any offers"
+        },
+        {
+          "text": "Give me the list of movies"
+        },
+        {
+          "text": "How many seats are available?"
+        },
+        {
+          "text": "List of movies with timings"
+        },
+        {
+          "text": "What are the movies that are screening today?"
+        },
+        {
+          "text": "What is the price of the ticket?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greeting",
+      "examples": [
+        {
+          "text": "Good afternoon"
+        },
+        {
+          "text": "Good evening"
+        },
+        {
+          "text": "Good morning"
+        },
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "Hi"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "enquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "movie",
+          "synonyms": [
+            "cinema",
+            "film",
+            "Flick",
+            "motion picture",
+            "moving picture",
+            "picture"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "movie timings",
+          "synonyms": [
+            "Show timing",
+            "time",
+            "timing"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "offers",
+          "synonyms": [
+            "discount",
+            "off"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "price",
+          "synonyms": [
+            "cost",
+            "rate",
+            "value"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "seats",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "greeting",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Good afternoon",
+          "synonyms": [
+            "afnun",
+            "ga",
+            "gud afnun"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Good evening",
+          "synonyms": [
+            "evng",
+            "ge",
+            "gud evng"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Good morning",
+          "synonyms": [
+            "gm",
+            "gud mrng",
+            "mrng"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Hie",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "movie_name",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Clifford",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Resident evil",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Skylab",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Sooryavanshi",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_6_1638697568152",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "For which movie you would like to book a ticket?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_5_1638697643512",
+      "event_name": "focus",
+      "dialog_node": "handler_10_1638697643549",
+      "previous_sibling": "handler_6_1638697643549"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1638697974538",
+      "context": {
+        "number": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_10_1638697974540"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1638698048649",
+      "context": {
+        "time": "@sys-time"
+      },
+      "conditions": "@sys-time",
+      "event_name": "input",
+      "dialog_node": "handler_10_1638698048649"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Enter the number of seats"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_1_1638697974538",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1638697974540",
+      "previous_sibling": "handler_10_1638697974540"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Enter the timings"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_9_1638698048649",
+      "event_name": "focus",
+      "dialog_node": "handler_4_1638698048649",
+      "previous_sibling": "handler_10_1638698048649"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1638697643512",
+      "context": {
+        "movie_name": "@movie_name"
+      },
+      "conditions": "@movie_name",
+      "event_name": "input",
+      "dialog_node": "handler_6_1638697643549"
+    },
+    {
+      "type": "standard",
+      "title": "greeting",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greeting || @greeting",
+      "dialog_node": "node_3_1638684071820",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#enquiry || @enquiry",
+      "dialog_node": "node_4_1638686615022",
+      "previous_sibling": "node_3_1638684071820"
+    },
+    {
+      "type": "standard",
+      "title": "Deleting context variables",
+      "parent": "node_6_1638697568152",
+      "conditions": "true",
+      "dialog_node": "node_4_1638699879309"
+    },
+    {
+      "type": "frame",
+      "title": "Book ticket",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Your ticket is booked for the movie $movie_name at $time for $number members"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "conditions": "#Book_ticket",
+      "dialog_node": "node_6_1638697568152",
+      "previous_sibling": "node_4_1638686615022"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "The show timings are 10:00am, 12:00pm and 6:00pm"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1638686615022",
+      "conditions": "@enquiry:(movie timings)",
+      "dialog_node": "response_1_1638687789189",
+      "previous_sibling": "response_2_1638686738533"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "The list of movies are: Skylab, Sooryavanshi, Resident evil and Clifford"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_4_1638686615022",
+      "conditions": "@enquiry:movie",
+      "dialog_node": "response_2_1638686738533"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "I wish you a pleasant morning. Tell me, How can I help you?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_3_1638684071820",
+      "conditions": "@greeting:(Good morning)",
+      "dialog_node": "response_4_1638684848601"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Each movie ticket costs two hundred rupees."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1638686615022",
+      "conditions": "@enquiry:price",
+      "dialog_node": "response_4_1638695127170",
+      "previous_sibling": "response_7_1638695050785"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "There are five seats available."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1638686615022",
+      "conditions": "@enquiry:seats",
+      "dialog_node": "response_7_1638695050785",
+      "previous_sibling": "response_9_1638694959777"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Happy evening. Tell me, How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1638684071820",
+      "conditions": "@greeting:(Good evening)",
+      "dialog_node": "response_8_1638684939858",
+      "previous_sibling": "response_4_1638684848601"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I wish you  a pleasant afternoon. Tell me how can I help you?  "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1638684071820",
+      "conditions": "@greeting:(Good afternoon)",
+      "dialog_node": "response_9_1638685009848",
+      "previous_sibling": "response_8_1638684939858"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello dear customer! Tell me, How can I  help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1638684071820",
+      "conditions": "@greeting:Hie",
+      "dialog_node": "response_9_1638685268040",
+      "previous_sibling": "response_9_1638685009848"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "There is a 10% discount on evening show"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1638686615022",
+      "conditions": "@enquiry:offers",
+      "dialog_node": "response_9_1638694959777",
+      "previous_sibling": "response_1_1638687789189"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1638697568152",
+      "variable": "$number",
+      "dialog_node": "slot_1_1638697974538",
+      "previous_sibling": "slot_5_1638697643512"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1638697568152",
+      "variable": "$movie_name",
+      "dialog_node": "slot_5_1638697643512",
+      "previous_sibling": "node_4_1638699879309"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1638697568152",
+      "variable": "$time",
+      "dialog_node": "slot_9_1638698048649",
+      "previous_sibling": "slot_1_1638697974538"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello, I am a movie ticketing bot capable of booking tickets. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Movie Ticketing Bot",
+  "language": "en",
+  "description": ""
+}
